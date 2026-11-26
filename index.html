@@ -16,13 +16,11 @@ color:#173b2b;
 }
 header{
 background:linear-gradient(135deg,#064e3b,#087f5b,#d4af37);
-color:white;
-text-align:center;
-padding:28px 15px;
+color:white;text-align:center;padding:28px 15px;
 }
 .logo{
 width:90px;height:90px;border-radius:50%;
-background:#fff;color:#087f5b;
+background:white;color:#087f5b;
 display:flex;align-items:center;justify-content:center;
 margin:auto;font-size:30px;font-weight:bold;
 border:4px solid #d4af37;
@@ -31,10 +29,7 @@ border:4px solid #d4af37;
 header h1{margin:12px 0 5px}
 header p{margin:5px}
 .container{max-width:950px;margin:auto;padding:16px}
-.cards{
-display:grid;grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .card{
 background:white;padding:18px;border-radius:16px;
 box-shadow:0 3px 12px #00000010;
@@ -68,13 +63,9 @@ display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;
 .paid-cash{background:#dcfce7;color:#166534}
 .paid-gpay{background:#dbeafe;color:#1d4ed8}
 .pending{background:#f3f4f6;color:#555}
-.badge{
-padding:6px 10px;border-radius:20px;
-font-size:12px;font-weight:bold;
-}
+.badge{padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
 footer{text-align:center;padding:25px;color:#777}
 .hidden{display:none!important}
-#membersList{margin-top:12px}
 .notice{
 background:#fff8df;padding:14px;border-radius:12px;
 margin:15px 0;color:#725500;
@@ -104,7 +95,7 @@ margin:15px 0;color:#725500;
 </div>
 
 <div class="card">
-<div>💰 Monthly Amount</div>
+<div>💰 Monthly Collection</div>
 <div class="stat">₹30,000</div>
 </div>
 
@@ -119,7 +110,7 @@ margin:15px 0;color:#725500;
 </div>
 </div>
 
-<h2 class="section-title">📊 December 2026 Dashboard</h2>
+<h2 class="section-title">📊 Monthly Dashboard</h2>
 
 <div class="cards">
 <div class="card">
@@ -144,7 +135,7 @@ margin:15px 0;color:#725500;
 </div>
 
 <div class="notice">
-<b>📅 December Payment:</b><br>
+<b>📅 December 2026 Payment</b><br>
 Payment Period: 1–15 December 2026<br>
 നറുക്കെടുപ്പ്: 15 December 2026
 </div>
@@ -159,7 +150,6 @@ Payment Period: 1–15 December 2026<br>
 
 <div class="card" style="margin-top:15px">
 <h3>🔐 Admin Mode</h3>
-<p>Payment Update ചെയ്യാൻ Admin Mode ഉപയോഗിക്കുക.</p>
 <button class="admin-btn" onclick="adminLogin()">Admin Login</button>
 <button class="light hidden" id="adminLogout" onclick="adminLogout()">Logout</button>
 <p id="adminStatus">🔒 View Only</p>
@@ -170,7 +160,8 @@ Payment Period: 1–15 December 2026<br>
 <div class="card">
 <label for="monthSelect"><b>Select Month:</b></label>
 <select id="monthSelect" onchange="changeMonth()">
-<option value="2026-12">December 2026</option>
+<option value="2026-11">November 2026</option>
+<option value="2026-12" selected>December 2026</option>
 <option value="2027-01">January 2027</option>
 <option value="2027-02">February 2027</option>
 <option value="2027-03">March 2027</option>
@@ -252,6 +243,7 @@ let cash=0,gpay=0,paid=0;
 
 members.forEach((name,i)=>{
 const payment=data[i]||"";
+
 if(payment==="cash"){cash+=1000;paid++}
 if(payment==="gpay"){gpay+=1000;paid++}
 
@@ -268,7 +260,7 @@ ${payment==="cash"?"☑ CASH PAID":payment==="gpay"?"☑ GOOGLE PAY":"⏳ PENDIN
 <div class="payment-buttons">
 <button class="paid-cash" ${!isAdmin?"disabled":""} onclick="setPayment(${i},'cash')">💵 Cash</button>
 <button class="paid-gpay" ${!isAdmin?"disabled":""} onclick="setPayment(${i},'gpay')">💳 Google Pay</button>
-<button class="pending" ${!isAdmin?"disabled":""} onclick="setPayment(${i,'none'})">↩ Reset</button>
+<button class="pending" ${!isAdmin?"disabled":""} onclick="setPayment(${i},'none')">↩ Reset</button>
 </div>
 `;
 
@@ -283,19 +275,24 @@ document.getElementById("gpayTotal").innerText="₹"+gpay.toLocaleString("en-IN"
 
 function setPayment(i,type){
 if(!isAdmin)return;
+
 let data=getData();
-if(type==="none")delete data[i];
-else data[i]=type;
+
+if(type==="none"){
+delete data[i];
+}else{
+data[i]=type;
+}
+
 saveData(data);
 render();
 }
 
 function adminLogin(){
-if(isAdmin){
-alert("Admin Mode is already active.");
-return;
-}
+if(isAdmin)return;
+
 const pass=prompt("Admin demo password:");
+
 if(pass==="VR1ADMIN"){
 isAdmin=true;
 document.getElementById("adminStatus").innerText="🟢 Admin Mode Active";
@@ -329,4 +326,3 @@ render();
 
 </body>
 </html>
-
