@@ -1,0 +1,18 @@
+VR1 DIGITAL KURI – PORTAL STARTER
+
+Included:
+- index.html: responsive Green/Gold public portal preview
+- assets/vr1-logo.jpeg: logo supplied by user
+- firestore.rules.template: deny-all starter template (not production-ready)
+
+Planned deployment architecture:
+1. Public landing page: group overview, published winner card, login entry only.
+2. Members: authenticated shared member access (Firebase Auth/backend implementation); read-only payment status, totals, notices, winner history.
+3. Admin: Firebase Authentication with admin-only permission; member/payment editing, draw publishing, announcements, credential management.
+4. Database: Firestore with restrictive rules; private member/payment records must not be publicly readable.
+5. WhatsApp: manual share first; automated messages require WhatsApp Business API/provider, consent, templates and backend scheduling.
+6. Responsive layout: mobile, tablet, desktop.
+
+This is a visual/configuration starter, not a deployed portal. Login, Firebase, draw logic,
+member data, security policy and automatic WhatsApp messages still require configuration.
+Never place shared passwords or secrets in HTML/client-side JavaScript.
