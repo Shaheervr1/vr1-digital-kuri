@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VR1 Digital Kuri</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#f0fdf4;color:#123;
+}
+header{
+ background:linear-gradient(135deg,#064e3b,#10b981);
+ color:white;text-align:center;padding:28px 15px;
+}
+.logo{
+ width:75px;height:75px;border-radius:50%;
+ background:white;color:#047857;
+ display:flex;align-items:center;justify-content:center;
+ font-size:27px;font-weight:bold;margin:auto auto 10px;
+ border:4px solid #a7f3d0;
+}
+header h1{margin:5px;font-size:26px}
+header p{margin:8px 0}
+.container{max-width:900px;margin:auto;padding:15px}
+.cards{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px;margin:15px 0;
+}
+.card{
+ background:white;padding:18px;border-radius:16px;
+ box-shadow:0 3px 12px #0001;
+}
+.stat{font-size:25px;font-weight:bold;color:#059669}
+.section{
+ background:white;padding:20px;margin:15px 0;
+ border-radius:18px;box-shadow:0 3px 12px #0001;
+}
+h2{color:#047857;margin-top:0}
+button{
+ background:#059669;color:white;border:none;
+ padding:12px 18px;border-radius:10px;
+ font-size:15px;font-weight:bold;cursor:pointer;
+ margin:4px;
+}
+button.secondary{background:#334155}
+button.danger{background:#dc2626}
+input[type=text]{
+ width:100%;padding:12px;border:1px solid #ccc;
+ border-radius:10px;font-size:16px;margin:6px 0;
+}
+.member{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;padding:12px 8px;border-bottom:1px solid #eee;
+}
+.member span{flex:1}
+.paid{color:#059669;font-weight:bold}
+.pending{color:#dc2626;font-weight:bold}
+.spinner{
+ width:220px;height:220px;margin:20px auto;
+ border-radius:50%;border:10px solid #10b981;
+ background:conic-gradient(
+ #a7f3d0 0deg 45deg,#059669 45deg 90deg,
+ #d1fae5 90deg 135deg,#047857 135deg 180deg,
+ #a7f3d0 180deg 225deg,#059669 225deg 270deg,
+ #d1fae5 270deg 315deg,#047857 315deg 360deg);
+ display:flex;align-items:center;justify-content:center;
+ box-shadow:0 5px 20px #0002;
+}
+.spinner div{
+ background:white;border-radius:50%;
+ width:105px;height:105px;
+ display:flex;align-items:center;justify-content:center;
+ font-weight:bold;color:#047857;text-align:center;
+ padding:10px;
+}
+#result{
+ text-align:center;font-size:22px;
+ font-weight:bold;color:#059669;margin:20px 0;
+}
+footer{text-align:center;padding:20px;color:#64748b}
+@media(max-width:500px){
+ header h1{font-size:22px}
+ .container{padding:10px}
+ .section{padding:15px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">VR1</div>
+<h1>💚 നമ്മളൊന്ന് – We are One 💚</h1>
+<p>VR1 DIGITAL KURI</p>
+<p>സ്നേഹം • വിശ്വാസം • ഒരുമ</p>
+</header>
+
+<div class="container">
+
+<div class="cards">
+<div class="card">
+<p>👥 Members</p>
+<div class="stat" id="memberCount">15</div>
+</div>
+<div class="card">
+<p>💰 Monthly Amount</p>
+<div class="stat">₹15,000</div>
+</div>
+<div class="card">
+<p>📅 Duration</p>
+<div class="stat">15 Months</div>
+</div>
+<div class="card">
+<p>💵 Monthly Contribution</p>
+<div class="stat">₹1,000</div>
+</div>
+</div>
+
+<div class="section">
+<h2>📋 Payment Tracking</h2>
+<p>പേയ്മെന്റ് ലഭിച്ച അംഗങ്ങളെ ഇവിടെ Mark ചെയ്യാം.</p>
+<div id="members"></div>
+<p id="paymentSummary"></p>
+<button onclick="resetPayments()" class="danger">
+Reset Payments
+</button>
+</div>
+
+<div class="section">
+<h2>🎰 Digital Lottery</h2>
+<p style="text-align:center">
+നറുക്കെടുപ്പിന് തയ്യാറാകൂ!
+</p>
+
+<div class="spinner">
+<div id="spinText">VR1<br>SPINNER</div>
+</div>
+
+<div id="result">🏆 വിജയിയെ ഇവിടെ പ്രഖ്യാപിക്കും</div>
+
+<div style="text-align:center">
+<button onclick="spin()">🎰 START LOTTERY</button>
+</div>
+</div>
+
+<div class="section">
+<h2>👤 Add / Edit Members</h2>
+<input type="text" id="newMember" placeholder="അംഗത്തിന്റെ പേര്">
+<button onclick="addMember()">Add Member</button>
+<button onclick="editMembers()" class="secondary">
+Edit Member Names
+</button>
+</div>
+
+</div>
+
+<footer>
+💚 VR1 – Nammal Onnu Digital Kuri 💚<br>
+We are One
+</footer>
+
+<script>
+let names = JSON.parse(localStorage.getItem("vr1names")) ||
+Array.from({length:15},(_,i)=>"Member "+(i+1));
+
+let paid = JSON.parse(localStorage.getItem("vr1paid")) ||
+Array(names.length).fill(false);
+
+function save(){
+ localStorage.setItem("vr1names",JSON.stringify(names));
+ localStorage.setItem("vr1paid",JSON.stringify(paid));
+}
+
+function render(){
+ let box=document.getElementById("members");
+ box.innerHTML="";
+ names.forEach((name,i)=>{
+  box.innerHTML+=`
+  <div class="member">
+   <span>${i+1}. ${name}</span>
+   <label class="${paid[i]?'paid':'pending'}">
+    <input type="checkbox" ${paid[i]?'checked':''}
+    onchange="togglePaid(${i})">
+    ${paid[i]?'Paid':'Pending'}
+   </label>
+  </div>`;
+ });
+ document.getElementById("memberCount").textContent=names.length;
+ summary();
+}
+
+function togglePaid(i){
+ paid[i]=!paid[i];
+ save();render();
+}
+
+function summary(){
+ let count=paid.filter(Boolean).length;
+ document.getElementById("paymentSummary").innerHTML=
+ "✅ Paid: "+count+
+ " | ⏳ Pending: "+(names.length-count)+
+ " | 💰 Collected: ₹"+(count*1000).toLocaleString("en-IN");
+}
+
+function addMember(){
+ let input=document.getElementById("newMember");
+ let name=input.value.trim();
+ if(!name)return alert("Enter member name");
+ names.push(name);
+ paid.push(false);
+ input.value="";
+ save();render();
+}
+
+function editMembers(){
+ let updated=names.map((n,i)=>{
+  let v=prompt("Member "+(i+1),n);
+  return v===null?n:v.trim()||n;
+ });
+ names=updated;
+ save();render();
+}
+
+function resetPayments(){
+ if(confirm("Reset all payment status?")){
+  paid=names.map(()=>false);
+  save();render();
+ }
+}
+
+function spin(){
+ if(names.length===0)return;
+ let btn=document.querySelector("button[onclick='spin()']");
+ btn.disabled=true;
+ document.getElementById("result").innerHTML="🎰 നറുക്കെടുപ്പ് നടക്കുന്നു...";
+ let winner=names[Math.floor(Math.random()*names.length)];
+ let counter=0;
+ let interval=setInterval(()=>{
+  document.getElementById("spinText").innerHTML=
+  names[Math.floor(Math.random()*names.length)];
+  counter++;
+  if(counter>=25){
+   clearInterval(interval);
+   document.getElementById("spinText").innerHTML="🏆 WINNER";
+   document.getElementById("result").innerHTML=
+   "🎉 വിജയി: "+winner+" 🎉";
+   btn.disabled=false;
+  }
+ },100);
+}
+
+render();
+</script>
+</body>
+</html>
