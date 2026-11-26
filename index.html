@@ -5,253 +5,328 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VR1 Digital Kuri</title>
+
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;font-family:Arial,sans-serif;
- background:#f0fdf4;color:#123;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f7f4;
+color:#173b2b;
 }
 header{
- background:linear-gradient(135deg,#064e3b,#10b981);
- color:white;text-align:center;padding:28px 15px;
+background:linear-gradient(135deg,#064e3b,#087f5b,#d4af37);
+color:white;
+text-align:center;
+padding:28px 15px;
 }
 .logo{
- width:75px;height:75px;border-radius:50%;
- background:white;color:#047857;
- display:flex;align-items:center;justify-content:center;
- font-size:27px;font-weight:bold;margin:auto auto 10px;
- border:4px solid #a7f3d0;
+width:90px;height:90px;border-radius:50%;
+background:#fff;color:#087f5b;
+display:flex;align-items:center;justify-content:center;
+margin:auto;font-size:30px;font-weight:bold;
+border:4px solid #d4af37;
 }
-header h1{margin:5px;font-size:26px}
-header p{margin:8px 0}
-.container{max-width:900px;margin:auto;padding:15px}
+.logo span{color:#d62828}
+header h1{margin:12px 0 5px}
+header p{margin:5px}
+.container{max-width:950px;margin:auto;padding:16px}
 .cards{
- display:grid;grid-template-columns:repeat(2,1fr);
- gap:12px;margin:15px 0;
+display:grid;grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 .card{
- background:white;padding:18px;border-radius:16px;
- box-shadow:0 3px 12px #0001;
+background:white;padding:18px;border-radius:16px;
+box-shadow:0 3px 12px #00000010;
 }
-.stat{font-size:25px;font-weight:bold;color:#059669}
-.section{
- background:white;padding:20px;margin:15px 0;
- border-radius:18px;box-shadow:0 3px 12px #0001;
-}
-h2{color:#047857;margin-top:0}
+.stat{font-size:25px;font-weight:bold;color:#087f5b}
+.section-title{margin:25px 0 12px}
 button{
- background:#059669;color:white;border:none;
- padding:12px 18px;border-radius:10px;
- font-size:15px;font-weight:bold;cursor:pointer;
- margin:4px;
+border:0;border-radius:10px;padding:12px;
+cursor:pointer;font-weight:bold;
 }
-button.secondary{background:#334155}
-button.danger{background:#dc2626}
-input[type=text]{
- width:100%;padding:12px;border:1px solid #ccc;
- border-radius:10px;font-size:16px;margin:6px 0;
+.primary{background:#087f5b;color:white}
+.gold{background:#d4af37;color:#173b2b}
+.light{background:#e7f2ec;color:#087f5b}
+.admin-btn{background:#173b2b;color:white}
+input,select{
+padding:10px;border:1px solid #ccc;border-radius:8px;
 }
 .member{
- display:flex;align-items:center;justify-content:space-between;
- gap:10px;padding:12px 8px;border-bottom:1px solid #eee;
+background:white;border-radius:13px;padding:14px;
+margin:10px 0;box-shadow:0 2px 8px #00000008;
 }
-.member span{flex:1}
-.paid{color:#059669;font-weight:bold}
-.pending{color:#dc2626;font-weight:bold}
-.spinner{
- width:220px;height:220px;margin:20px auto;
- border-radius:50%;border:10px solid #10b981;
- background:conic-gradient(
- #a7f3d0 0deg 45deg,#059669 45deg 90deg,
- #d1fae5 90deg 135deg,#047857 135deg 180deg,
- #a7f3d0 180deg 225deg,#059669 225deg 270deg,
- #d1fae5 270deg 315deg,#047857 315deg 360deg);
- display:flex;align-items:center;justify-content:center;
- box-shadow:0 5px 20px #0002;
+.member-row{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;flex-wrap:wrap;
 }
-.spinner div{
- background:white;border-radius:50%;
- width:105px;height:105px;
- display:flex;align-items:center;justify-content:center;
- font-weight:bold;color:#047857;text-align:center;
- padding:10px;
+.member-name{font-weight:bold}
+.payment-buttons{
+display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;
 }
-#result{
- text-align:center;font-size:22px;
- font-weight:bold;color:#059669;margin:20px 0;
+.payment-buttons button{font-size:13px}
+.paid-cash{background:#dcfce7;color:#166534}
+.paid-gpay{background:#dbeafe;color:#1d4ed8}
+.pending{background:#f3f4f6;color:#555}
+.badge{
+padding:6px 10px;border-radius:20px;
+font-size:12px;font-weight:bold;
 }
-footer{text-align:center;padding:20px;color:#64748b}
+footer{text-align:center;padding:25px;color:#777}
+.hidden{display:none!important}
+#membersList{margin-top:12px}
+.notice{
+background:#fff8df;padding:14px;border-radius:12px;
+margin:15px 0;color:#725500;
+}
 @media(max-width:500px){
- header h1{font-size:22px}
- .container{padding:10px}
- .section{padding:15px}
+.cards{grid-template-columns:1fr 1fr}
+.container{padding:12px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">VR1</div>
-<h1>💚 നമ്മളൊന്ന് – We are One 💚</h1>
-<p>VR1 DIGITAL KURI</p>
-<p>സ്നേഹം • വിശ്വാസം • ഒരുമ</p>
+<div class="logo">VR<span>1</span></div>
+<h1>നമ്മളൊന്ന്</h1>
+<p>WE ARE ONE</p>
+<p>💚 VR1 DIGITAL KURI 💚</p>
 </header>
 
 <div class="container">
 
 <div class="cards">
 <div class="card">
-<p>👥 Members</p>
-<div class="stat" id="memberCount">15</div>
+<div>👥 Members</div>
+<div class="stat">30</div>
 </div>
+
 <div class="card">
-<p>💰 Monthly Amount</p>
-<div class="stat">₹15,000</div>
+<div>💰 Monthly Amount</div>
+<div class="stat">₹30,000</div>
 </div>
+
 <div class="card">
-<p>📅 Duration</p>
-<div class="stat">15 Months</div>
-</div>
-<div class="card">
-<p>💵 Monthly Contribution</p>
+<div>💵 Contribution</div>
 <div class="stat">₹1,000</div>
 </div>
-</div>
 
-<div class="section">
-<h2>📋 Payment Tracking</h2>
-<p>പേയ്മെന്റ് ലഭിച്ച അംഗങ്ങളെ ഇവിടെ Mark ചെയ്യാം.</p>
-<div id="members"></div>
-<p id="paymentSummary"></p>
-<button onclick="resetPayments()" class="danger">
-Reset Payments
-</button>
-</div>
-
-<div class="section">
-<h2>🎰 Digital Lottery</h2>
-<p style="text-align:center">
-നറുക്കെടുപ്പിന് തയ്യാറാകൂ!
-</p>
-
-<div class="spinner">
-<div id="spinText">VR1<br>SPINNER</div>
-</div>
-
-<div id="result">🏆 വിജയിയെ ഇവിടെ പ്രഖ്യാപിക്കും</div>
-
-<div style="text-align:center">
-<button onclick="spin()">🎰 START LOTTERY</button>
+<div class="card">
+<div>📅 Duration</div>
+<div class="stat">30 Months</div>
 </div>
 </div>
 
-<div class="section">
-<h2>👤 Add / Edit Members</h2>
-<input type="text" id="newMember" placeholder="അംഗത്തിന്റെ പേര്">
-<button onclick="addMember()">Add Member</button>
-<button onclick="editMembers()" class="secondary">
-Edit Member Names
-</button>
+<h2 class="section-title">📊 December 2026 Dashboard</h2>
+
+<div class="cards">
+<div class="card">
+<div>✅ Paid Members</div>
+<div class="stat" id="paidCount">0</div>
 </div>
+
+<div class="card">
+<div>⏳ Pending Members</div>
+<div class="stat" id="pendingCount">30</div>
+</div>
+
+<div class="card">
+<div>💵 Cash Received</div>
+<div class="stat" id="cashTotal">₹0</div>
+</div>
+
+<div class="card">
+<div>💳 Google Pay</div>
+<div class="stat" id="gpayTotal">₹0</div>
+</div>
+</div>
+
+<div class="notice">
+<b>📅 December Payment:</b><br>
+Payment Period: 1–15 December 2026<br>
+നറുക്കെടുപ്പ്: 15 December 2026
+</div>
+
+<div class="card">
+<h3>💳 Google Pay Details</h3>
+<p><b>Name:</b> KUNHIMARAKKAR</p>
+<p><b>Number:</b> <span id="gpayNumber">8606879797</span></p>
+<button class="primary" onclick="copyNumber()">📋 Copy GPay Number</button>
+<p>Monthly Contribution: ₹1,000</p>
+</div>
+
+<div class="card" style="margin-top:15px">
+<h3>🔐 Admin Mode</h3>
+<p>Payment Update ചെയ്യാൻ Admin Mode ഉപയോഗിക്കുക.</p>
+<button class="admin-btn" onclick="adminLogin()">Admin Login</button>
+<button class="light hidden" id="adminLogout" onclick="adminLogout()">Logout</button>
+<p id="adminStatus">🔒 View Only</p>
+</div>
+
+<h2 class="section-title">👥 Member Payment Register</h2>
+
+<div class="card">
+<label for="monthSelect"><b>Select Month:</b></label>
+<select id="monthSelect" onchange="changeMonth()">
+<option value="2026-12">December 2026</option>
+<option value="2027-01">January 2027</option>
+<option value="2027-02">February 2027</option>
+<option value="2027-03">March 2027</option>
+<option value="2027-04">April 2027</option>
+<option value="2027-05">May 2027</option>
+<option value="2027-06">June 2027</option>
+<option value="2027-07">July 2027</option>
+<option value="2027-08">August 2027</option>
+<option value="2027-09">September 2027</option>
+<option value="2027-10">October 2027</option>
+<option value="2027-11">November 2027</option>
+<option value="2027-12">December 2027</option>
+</select>
+</div>
+
+<div id="membersList"></div>
 
 </div>
 
 <footer>
-💚 VR1 – Nammal Onnu Digital Kuri 💚<br>
-We are One
+💚 VR1 – നമ്മളൊന്ന് | WE ARE ONE 💚<br>
+Digital Kuri Management
 </footer>
 
 <script>
-let names = JSON.parse(localStorage.getItem("vr1names")) ||
-Array.from({length:15},(_,i)=>"Member "+(i+1));
+const members=[
+"കുഞ്ഞിമരക്കാർ - 1",
+"കുഞ്ഞിമരക്കാർ - 2",
+"ജമീല - 1",
+"ജമീല - 2",
+"സഹീർ",
+"സഹീദ ഷഹീർ",
+"റഹ്‌മ ഷഹീർ",
+"ജാസിം - 1",
+"ജാസിം - 2",
+"നിസാന ജാസിം",
+"മുഹൈന",
+"ഹിബ",
+"മൊയ്‌നു",
+"സുലൈമാൻ കുണ്ടൂർ - 1",
+"സുലൈമാൻ കുണ്ടൂർ - 2",
+"സ്വാദിഖ് - 1",
+"സ്വാദിഖ് - 2",
+"റസ്വ്വകുഞ്ഞിമരക്കാർ",
+"സൈഫു മജീദ്",
+"മൈമൂന കുണ്ടൂർ",
+"സഹദ് കുണ്ടൂർ - 1",
+"സഹദ് കുണ്ടൂർ - 2",
+"ഇല്യാസ് വാളക്കുളം",
+"ഷെറി ഇല്യാസ്",
+"മുബഷിറ കുണ്ടൂർ",
+"ആയിഷ - ടി",
+"നഫീസ AP",
+"നഫീസ മുഹമ്മദ്",
+"ഖദീജ കല്ലത്താണി",
+"ആസിഫ് (കുഞ്ഞോൻ)"
+];
 
-let paid = JSON.parse(localStorage.getItem("vr1paid")) ||
-Array(names.length).fill(false);
+let isAdmin=false;
+let currentMonth=document.getElementById("monthSelect").value;
 
-function save(){
- localStorage.setItem("vr1names",JSON.stringify(names));
- localStorage.setItem("vr1paid",JSON.stringify(paid));
+function storageKey(){
+return "vr1_payment_"+currentMonth;
+}
+
+function getData(){
+return JSON.parse(localStorage.getItem(storageKey())||"{}");
+}
+
+function saveData(data){
+localStorage.setItem(storageKey(),JSON.stringify(data));
 }
 
 function render(){
- let box=document.getElementById("members");
- box.innerHTML="";
- names.forEach((name,i)=>{
-  box.innerHTML+=`
-  <div class="member">
-   <span>${i+1}. ${name}</span>
-   <label class="${paid[i]?'paid':'pending'}">
-    <input type="checkbox" ${paid[i]?'checked':''}
-    onchange="togglePaid(${i})">
-    ${paid[i]?'Paid':'Pending'}
-   </label>
-  </div>`;
- });
- document.getElementById("memberCount").textContent=names.length;
- summary();
+const data=getData();
+const list=document.getElementById("membersList");
+list.innerHTML="";
+let cash=0,gpay=0,paid=0;
+
+members.forEach((name,i)=>{
+const payment=data[i]||"";
+if(payment==="cash"){cash+=1000;paid++}
+if(payment==="gpay"){gpay+=1000;paid++}
+
+const div=document.createElement("div");
+div.className="member";
+
+div.innerHTML=`
+<div class="member-row">
+<div class="member-name">${i+1}. ${name}</div>
+<div class="badge ${payment==="cash"?"paid-cash":payment==="gpay"?"paid-gpay":"pending"}">
+${payment==="cash"?"☑ CASH PAID":payment==="gpay"?"☑ GOOGLE PAY":"⏳ PENDING"}
+</div>
+</div>
+<div class="payment-buttons">
+<button class="paid-cash" ${!isAdmin?"disabled":""} onclick="setPayment(${i},'cash')">💵 Cash</button>
+<button class="paid-gpay" ${!isAdmin?"disabled":""} onclick="setPayment(${i},'gpay')">💳 Google Pay</button>
+<button class="pending" ${!isAdmin?"disabled":""} onclick="setPayment(${i,'none'})">↩ Reset</button>
+</div>
+`;
+
+list.appendChild(div);
+});
+
+document.getElementById("paidCount").innerText=paid;
+document.getElementById("pendingCount").innerText=30-paid;
+document.getElementById("cashTotal").innerText="₹"+cash.toLocaleString("en-IN");
+document.getElementById("gpayTotal").innerText="₹"+gpay.toLocaleString("en-IN");
 }
 
-function togglePaid(i){
- paid[i]=!paid[i];
- save();render();
+function setPayment(i,type){
+if(!isAdmin)return;
+let data=getData();
+if(type==="none")delete data[i];
+else data[i]=type;
+saveData(data);
+render();
 }
 
-function summary(){
- let count=paid.filter(Boolean).length;
- document.getElementById("paymentSummary").innerHTML=
- "✅ Paid: "+count+
- " | ⏳ Pending: "+(names.length-count)+
- " | 💰 Collected: ₹"+(count*1000).toLocaleString("en-IN");
+function adminLogin(){
+if(isAdmin){
+alert("Admin Mode is already active.");
+return;
+}
+const pass=prompt("Admin demo password:");
+if(pass==="VR1ADMIN"){
+isAdmin=true;
+document.getElementById("adminStatus").innerText="🟢 Admin Mode Active";
+document.getElementById("adminLogout").classList.remove("hidden");
+render();
+}else{
+alert("Incorrect password.");
+}
 }
 
-function addMember(){
- let input=document.getElementById("newMember");
- let name=input.value.trim();
- if(!name)return alert("Enter member name");
- names.push(name);
- paid.push(false);
- input.value="";
- save();render();
+function adminLogout(){
+isAdmin=false;
+document.getElementById("adminStatus").innerText="🔒 View Only";
+document.getElementById("adminLogout").classList.add("hidden");
+render();
 }
 
-function editMembers(){
- let updated=names.map((n,i)=>{
-  let v=prompt("Member "+(i+1),n);
-  return v===null?n:v.trim()||n;
- });
- names=updated;
- save();render();
+function changeMonth(){
+currentMonth=document.getElementById("monthSelect").value;
+render();
 }
 
-function resetPayments(){
- if(confirm("Reset all payment status?")){
-  paid=names.map(()=>false);
-  save();render();
- }
-}
-
-function spin(){
- if(names.length===0)return;
- let btn=document.querySelector("button[onclick='spin()']");
- btn.disabled=true;
- document.getElementById("result").innerHTML="🎰 നറുക്കെടുപ്പ് നടക്കുന്നു...";
- let winner=names[Math.floor(Math.random()*names.length)];
- let counter=0;
- let interval=setInterval(()=>{
-  document.getElementById("spinText").innerHTML=
-  names[Math.floor(Math.random()*names.length)];
-  counter++;
-  if(counter>=25){
-   clearInterval(interval);
-   document.getElementById("spinText").innerHTML="🏆 WINNER";
-   document.getElementById("result").innerHTML=
-   "🎉 വിജയി: "+winner+" 🎉";
-   btn.disabled=false;
-  }
- },100);
+function copyNumber(){
+navigator.clipboard.writeText("8606879797")
+.then(()=>alert("GPay Number Copied!"))
+.catch(()=>alert("Number: 8606879797"));
 }
 
 render();
 </script>
+
 </body>
 </html>
+
