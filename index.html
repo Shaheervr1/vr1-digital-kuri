@@ -1,8 +1,441 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR1 Digital Kuri | നമ്മളൊന്ന്</title><meta name="theme-color" content="#06391e"><style>
-:root{--g:#06391e;--g2:#0c542b;--gold:#e4b52f;--cream:#fff9e8;--ink:#10251a}*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#041e12,#0c542b 55%,#041e12);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--cream)}.wrap{max-width:1100px;margin:auto;padding:18px}.header{display:flex;align-items:center;gap:18px;padding:15px;border:1px solid #d5a923;border-radius:20px;background:#031d12e8;box-shadow:0 12px 35px #0005}.logo{width:115px;height:115px;object-fit:contain;border-radius:50%;flex-shrink:0}.brand h1{margin:0;color:var(--gold);font-size:clamp(1.3rem,4vw,2.4rem)}.brand p{margin:5px 0;color:#fff}.panel{margin-top:20px;border:1px solid #d5a923;border-radius:20px;background:#031d12e8;padding:20px;box-shadow:0 10px 30px #0004}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}.stat{border:1px solid #bd941f;border-radius:16px;padding:18px;background:linear-gradient(135deg,#0b542b,#031d12)}.stat small{display:block;color:#e7d8a0}.stat strong{font-size:1.7rem;color:var(--gold)}button{cursor:pointer;border:0;border-radius:12px;padding:13px 18px;font-weight:800;background:linear-gradient(135deg,#f8d75c,#c78a09);color:#17331f}button.secondary{background:#0b542b;color:white;border:1px solid var(--gold)}input{width:100%;padding:13px;border-radius:10px;border:1px solid #d5a923;margin:6px 0 12px;font-size:1rem}.hidden{display:none}.winner{border:2px solid var(--gold);border-radius:18px;padding:22px;text-align:center;background:radial-gradient(circle,#16552b,#031d12);}.winner h2{color:var(--gold)}.foot{text-align:center;color:#dfd4a8;padding:25px;font-size:.85rem}.notice{color:#f2df9a;font-size:.95rem}.actions{display:flex;flex-wrap:wrap;gap:10px}a{color:var(--gold)}@media(max-width:600px){.header{align-items:flex-start}.logo{width:82px;height:82px}.wrap{padding:10px}.panel{padding:15px}}
-</style></head><body><main class="wrap"><header class="header"><img class="<img class="logo" src="vr1_header_banner.png" alt="VR1 നമ്മളൊന്ന് Digital Kuri Premium Banner" style="width:100%;max-width:100%;height:auto;border-radius:14px;">
-<section class="panel"><h2 style="color:var(--gold)">Public Dashboard</h2><div class="grid"><div class="stat"><small>Members</small><strong>30</strong></div><div class="stat"><small>Monthly Contribution</small><strong>₹1,000</strong></div><div class="stat"><small>Monthly Pool</small><strong>₹30,000</strong></div><div class="stat"><small>Duration</small><strong>30 Months</strong></div></div><p class="notice">Public view displays group overview and announcement only. Detailed member payment information is inside Members Login.</p></section>
-<section class="panel" id="winner"><h2 style="color:var(--gold)">🏆 Latest Winner</h2><div class="winner"><h2>WINNER ANNOUNCEMENT</h2><p>Winner details will appear here after the Admin publishes the draw.</p><p>നമ്മളൊന്ന് – WE ARE ONE</p></div><p style="margin-top:15px"><button class="secondary" onclick="shareWinner()">Share Winner via WhatsApp</button></p></section>
-<section class="panel" id="login"><h2 style="color:var(--gold)">🔐 Members Login</h2><p>Members access the payment status and history after authentication.</p><label>Username</label><input autocomplete="username" placeholder="Member username"><label>Password</label><input type="password" autocomplete="current-password" placeholder="Member password"><button onclick="alert('Firebase Authentication setup is pending. This starter is not yet a live secure login.')">Login</button><p class="notice">Login will be connected to Firebase Authentication before deployment. Do not use real credentials on this starter page.</p></section>
-<section class="panel"><h2 style="color:var(--gold)">Member Dashboard (planned after login)</h2><div class="grid"><div class="stat"><small>Paid Members</small><strong>—</strong></div><div class="stat"><small>Pending Members</small><strong>—</strong></div><div class="stat"><small>Total Collected</small><strong>—</strong></div><div class="stat"><small>Pending Amount</small><strong>—</strong></div></div><p>Member names, monthly paid/pending statuses, collection totals, notices, and winner archive will be available in this protected area.</p></section>
-<section class="panel"><h2 style="color:var(--gold)">Admin Controls (planned)</h2><ul><li>Admin authentication</li><li>Member and payment management</li><li>Draw control and winner publishing</li><li>Winner history archive</li><li>Announcement management</li><li>WhatsApp notification configuration and logs</li><li>Member shared-access credential management</li></ul><p class="notice">Admin functions will be protected with Firebase Auth and server-side/Firestore security rules—not a password-only frontend gate.</p></section><footer class="foot">VR1 Digital Kuri • നമ്മളൊന്ന് – WE ARE ONE</footer></main><script>function shareWinner(){let t='VR1 Digital Kuri – നമ്മളൊന്ന്\nWinner announcement will be updated on our portal.';window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')}</script></body></html>
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VR1 Digital Kuri | നമ്മളൊന്ന്</title>
+<meta name="theme-color" content="#06391e">
+
+<style>
+:root{
+  --green:#052b19;
+  --green2:#0b5430;
+  --gold:#e4b52f;
+  --cream:#fff9e8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:linear-gradient(145deg,#03190f,#0b542b,#03190f);
+  color:var(--cream);
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.wrap{max-width:1000px;margin:auto;padding:15px}
+header{
+  background:#031d12;
+  border:1px solid var(--gold);
+  border-radius:22px;
+  padding:18px;
+  text-align:center;
+}
+.logo{
+  display:block;
+  width:190px;
+  max-width:70%;
+  margin:0 auto 10px;
+  object-fit:contain;
+}
+header h1{
+  color:var(--gold);
+  margin:8px 0;
+}
+header p{margin:5px}
+.panel{
+  margin-top:18px;
+  background:#031d12eF;
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:18px;
+}
+h2{color:var(--gold);margin-top:0}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+.card{
+  background:linear-gradient(145deg,#0b5430,#031d12);
+  border:1px solid #bd941f;
+  border-radius:16px;
+  padding:17px;
+}
+.card small{color:#e7d8a0}
+.card strong{
+  display:block;
+  color:var(--gold);
+  font-size:1.6rem;
+  margin-top:5px;
+}
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  font-weight:800;
+  background:linear-gradient(135deg,#f8d75c,#c78a09);
+  color:#17331f;
+}
+.secondary{
+  background:#0b542b;
+  border:1px solid var(--gold);
+  color:white;
+}
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #d5a923;
+  margin:6px 0 12px;
+  font-size:16px;
+}
+label{display:block;color:#f1df9c}
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.row>*{flex:1}
+.notice{color:#f2df9a}
+.preview{
+  width:100%;
+  max-height:500px;
+  object-fit:contain;
+  border-radius:14px;
+  border:1px solid var(--gold);
+  margin-top:10px;
+}
+.hidden{display:none}
+.winner{
+  border:2px solid var(--gold);
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+  background:radial-gradient(circle,#16552b,#031d12);
+}
+.footer{text-align:center;padding:25px;color:#dfd4a8}
+.progress{
+  background:#244d36;
+  border-radius:20px;
+  height:15px;
+  overflow:hidden;
+}
+.progress div{
+  background:var(--gold);
+  height:100%;
+  width:0%;
+}
+@media(max-width:600px){
+  .wrap{padding:10px}
+  .panel{padding:14px}
+  .logo{width:150px}
+}
+@media print{
+  body{background:white;color:black}
+  body *{visibility:hidden}
+  #receipt,#receipt *{visibility:visible}
+  #receipt{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    background:white;
+    color:black;
+    border:2px solid #b99730;
+  }
+  .no-print{display:none!important}
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+<header>
+  <img class="logo" src="vr1-logo.jpeg"
+       alt="VR1 Official Logo"
+       onerror="this.style.display='none'">
+  <h1>VR1 DIGITAL KURI</h1>
+  <p>നമ്മളൊന്ന് – WE ARE ONE</p>
+  <p>Premium Gold • Green Portal</p>
+  <button class="secondary" onclick="toggleLanguage()">മലയാളം / English</button>
+</header>
+
+<!-- DASHBOARD -->
+<section class="panel">
+  <h2 data-ml="പ്രധാന ഡാഷ്ബോർഡ്" data-en="Main Dashboard">പ്രധാന ഡാഷ്ബോർഡ്</h2>
+
+  <div class="grid">
+    <div class="card">
+      <small data-ml="അംഗങ്ങൾ" data-en="Members">അംഗങ്ങൾ</small>
+      <strong>30</strong>
+    </div>
+
+    <div class="card">
+      <small data-ml="പ്രതിമാസ തുക" data-en="Monthly Contribution">പ്രതിമാസ തുക</small>
+      <strong>₹1,000</strong>
+    </div>
+
+    <div class="card">
+      <small data-ml="മാസത്തെ മൊത്തം" data-en="Monthly Pool">മാസത്തെ മൊത്തം</small>
+      <strong>₹30,000</strong>
+    </div>
+
+    <div class="card">
+      <small data-ml="കാലാവധി" data-en="Duration">കാലാവധി</small>
+      <strong>30 Months</strong>
+    </div>
+  </div>
+</section>
+
+<!-- DATE AND TIME -->
+<section class="panel">
+  <h2 data-ml="📅 അടുത്ത Kuri തീയതി" data-en="📅 Next Kuri Date">📅 അടുത്ത Kuri തീയതി</h2>
+
+  <div class="card">
+    <h3 id="drawDateDisplay" style="color:var(--gold)">തീയതി അപ്ഡേറ്റ് ചെയ്തിട്ടില്ല</h3>
+    <p id="drawTimeDisplay">സമയം അപ്ഡേറ്റ് ചെയ്തിട്ടില്ല</p>
+    <p id="drawNoteDisplay">അറിയിപ്പ്</p>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="panel">
+  <h2 data-ml="🎬 Kuri Update Video" data-en="🎬 Kuri Update Video">🎬 Kuri Update Video</h2>
+
+  <p class="notice">Kuri സംബന്ധിച്ച പുതിയ വീഡിയോ ഇവിടെ പ്രദർശിപ്പിക്കും.</p>
+
+  <video id="videoPreview" class="preview hidden"
+         controls playsinline></video>
+
+  <p id="videoPlaceholder" class="notice">
+    പുതിയ വീഡിയോ അപ്ഡേറ്റ് ചെയ്യുമ്പോൾ ഇവിടെ Preview കാണാം.
+  </p>
+</section>
+
+<!-- WINNER -->
+<section class="panel" id="winnerSection">
+  <h2 data-ml="🏆 വിജയിയുടെ പ്രഖ്യാപനം" data-en="🏆 Winner Announcement">🏆 വിജയിയുടെ പ്രഖ്യാപനം</h2>
+
+  <div class="winner">
+    <img id="winnerPoster" class="preview hidden" alt="Winner Poster">
+    <h2 id="winnerTitle">WINNER ANNOUNCEMENT</h2>
+    <p id="winnerText">വിജയിയുടെ പോസ്റ്റർ ഇവിടെ പ്രസിദ്ധീകരിക്കും.</p>
+  </div>
+
+  <p>
+    <button class="secondary" onclick="shareWinner()">
+      WhatsApp Share
+    </button>
+  </p>
+</section>
+
+<!-- ADMIN DEMO -->
+<section class="panel">
+  <h2>🔐 Admin Update Preview</h2>
+
+  <p class="notice">
+    ഈ വിഭാഗം ഇപ്പോൾ Preview Demo ആണ്.
+    അപ്ഡേറ്റുകൾ ഈ ബ്രൗസറിൽ മാത്രം താൽക്കാലികമായി കാണും.
+  </p>
+
+  <label>Draw Date</label>
+  <input type="date" id="adminDate">
+
+  <label>Draw Time</label>
+  <input type="time" id="adminTime">
+
+  <label>Announcement</label>
+  <textarea id="adminNote" rows="3"
+    placeholder="Announcement"></textarea>
+
+  <button onclick="updateDraw()">Update Date & Announcement</button>
+
+  <hr>
+
+  <h3 style="color:var(--gold)">Upload Kuri Video</h3>
+  <input type="file" accept="video/*" id="videoUpload">
+  <button onclick="previewVideo()">Preview Video</button>
+
+  <hr>
+
+  <h3 style="color:var(--gold)">Upload Winner Poster</h3>
+  <input type="file" accept="image/*" id="posterUpload">
+  <button onclick="previewPoster()">Preview Poster</button>
+
+  <hr>
+
+  <label>Winner Title</label>
+  <input id="adminWinnerTitle" placeholder="Winner Announcement">
+
+  <label>Winner Message</label>
+  <textarea id="adminWinnerMessage" rows="3"
+    placeholder="Winner details"></textarea>
+
+  <button onclick="updateWinner()">Update Winner Section</button>
+</section>
+
+<!-- RECEIPT -->
+<section class="panel">
+  <h2>🧾 Payment Receipt Preview</h2>
+
+  <p class="notice">
+    Receipt വിവരങ്ങൾ പൂരിപ്പിച്ച് Print / Save PDF ഉപയോഗിക്കുക.
+  </p>
+
+  <label>Member Name</label>
+  <input id="rName" placeholder="Member name">
+
+  <label>Member Number</label>
+  <input id="rNumber" placeholder="Member number">
+
+  <label>Payment Month</label>
+  <input id="rMonth" placeholder="December 2026">
+
+  <label>Amount (₹)</label>
+  <input id="rAmount" type="number" value="1000">
+
+  <label>Payment Date</label>
+  <input id="rDate" type="date">
+
+  <button onclick="generateReceipt()">Generate Receipt</button>
+
+  <div id="receipt" class="panel hidden">
+    <div style="text-align:center">
+      <img src="vr1-logo.jpeg" style="width:120px;max-width:40%"
+           alt="VR1 Logo">
+      <h2 style="color:#b38a1c">VR1 DIGITAL KURI</h2>
+      <p>നമ്മളൊന്ന് – WE ARE ONE</p>
+      <h3>PAYMENT RECEIPT</h3>
+    </div>
+
+    <hr>
+
+    <p><strong>Receipt No:</strong> <span id="receiptNo"></span></p>
+    <p><strong>Member Name:</strong> <span id="receiptName"></span></p>
+    <p><strong>Member No:</strong> <span id="receiptMember"></span></p>
+    <p><strong>Payment Month:</strong> <span id="receiptMonth"></span></p>
+    <p><strong>Amount:</strong> ₹<span id="receiptAmount"></span></p>
+    <p><strong>Payment Date:</strong> <span id="receiptDate"></span></p>
+    <p><strong>Status:</strong> PAID ✓</p>
+
+    <hr>
+
+    <p style="text-align:center">
+      Thank you for your payment!
+    </p>
+
+    <button class="no-print" onclick="window.print()">
+      Print / Save PDF
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  VR1 Digital Kuri • നമ്മളൊന്ന് – WE ARE ONE
+</footer>
+
+</main>
+
+<script>
+let currentLanguage="ml";
+
+function toggleLanguage(){
+  currentLanguage=currentLanguage==="ml"?"en":"ml";
+
+  document.querySelectorAll("[data-ml]").forEach(el=>{
+    el.textContent=el.getAttribute(
+      currentLanguage==="ml"?"data-ml":"data-en"
+    );
+  });
+
+  document.documentElement.lang=currentLanguage==="ml"?"ml":"en";
+}
+
+function updateDraw(){
+  const date=document.getElementById("adminDate").value;
+  const time=document.getElementById("adminTime").value;
+  const note=document.getElementById("adminNote").value;
+
+  if(date){
+    document.getElementById("drawDateDisplay").textContent=date;
+  }
+
+  if(time){
+    document.getElementById("drawTimeDisplay").textContent=time;
+  }
+
+  document.getElementById("drawNoteDisplay").textContent=
+    note||"അറിയിപ്പ്";
+}
+
+function previewVideo(){
+  const file=document.getElementById("videoUpload").files[0];
+  if(!file)return alert("Please select a video");
+
+  const video=document.getElementById("videoPreview");
+  video.src=URL.createObjectURL(file);
+  video.classList.remove("hidden");
+  document.getElementById("videoPlaceholder").classList.add("hidden");
+}
+
+function previewPoster(){
+  const file=document.getElementById("posterUpload").files[0];
+  if(!file)return alert("Please select a poster");
+
+  const poster=document.getElementById("winnerPoster");
+  poster.src=URL.createObjectURL(file);
+  poster.classList.remove("hidden");
+}
+
+function updateWinner(){
+  const title=document.getElementById("adminWinnerTitle").value;
+  const message=document.getElementById("adminWinnerMessage").value;
+
+  if(title){
+    document.getElementById("winnerTitle").textContent=title;
+  }
+
+  if(message){
+    document.getElementById("winnerText").textContent=message;
+  }
+}
+
+function generateReceipt(){
+  const name=document.getElementById("rName").value;
+  const member=document.getElementById("rNumber").value;
+  const month=document.getElementById("rMonth").value;
+  const amount=document.getElementById("rAmount").value;
+  const date=document.getElementById("rDate").value;
+
+  if(!name||!member||!month||!date){
+    alert("Please fill all receipt details");
+    return;
+  }
+
+  const receiptId="VR1-"+Date.now().toString().slice(-8);
+
+  document.getElementById("receiptNo").textContent=receiptId;
+  document.getElementById("receiptName").textContent=name;
+  document.getElementById("receiptMember").textContent=member;
+  document.getElementById("receiptMonth").textContent=month;
+  document.getElementById("receiptAmount").textContent=amount;
+  document.getElementById("receiptDate").textContent=date;
+
+  document.getElementById("receipt").classList.remove("hidden");
+}
+
+function shareWinner(){
+  const text=
+    "VR1 Digital Kuri – നമ്മളൊന്ന്\n"+
+    "Winner announcement will be updated on our portal.";
+
+  window.open(
+    "https://wa.me/?text="+encodeURIComponent(text),
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>
