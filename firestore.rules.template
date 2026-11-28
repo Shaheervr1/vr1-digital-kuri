@@ -1,9 +1,0 @@
-// TEMPLATE ONLY. Replace admin UID and design member-access claims/groups carefully.
-// Never deploy permissive rules. This placeholder denies all database access until
-// the authenticated admin/member policy is configured and reviewed.
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} { allow read, write: if false; }
-  }
-}
